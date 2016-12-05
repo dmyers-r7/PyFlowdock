@@ -47,7 +47,7 @@ class StreamingAPI(object):
 		assert active in self.ALLOWED_STATUSES, 'The `active` argument must be in %s.' % str(self.ALLOWED_STATUSES)
 		self.flows = flows
 		self.active = active
-		for line in self.stream.iter_lines(self.STREAM_CHUNK_SIZE):
+		for line in self.stream.iter_lines(self.STREAM_CHUNK_SIZE, delimiter='\n'):
 			if line and line != ':':
 				if not plain and self.accept == DEFAULT_CONTENT_TYPE:
 					yield json.loads(line)
